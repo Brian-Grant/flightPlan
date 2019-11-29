@@ -1,0 +1,54 @@
+Provided is:
+
+in.txt <- passenger constraints to redirect into the program when running the 
+	program with schedule.txt
+
+in2.txt <- passenger constraints to redirect into the program when running the
+	program with flight_file.txt
+
+schedule.txt <- a small custom flight schedule list for initial debugging
+
+flight_file.txt <- the default generated flight schedule list from the
+	provided generator program
+------------------------------------------------------------------------------------------------
+
+TO TEST THE PROGRAM
+
+"make testany"
+	-- find any path between the specified cities on schedule.txt
+
+"make testany2"
+	-- find any path between the specified cities on flight_file.txt
+
+"make testearl"	
+	-- find earliest path between the specified cities on schedule.txt
+
+"make testearl2"
+	-- find earliest path between the specified cities on flight_file.txt
+
+to test on anything else other than the above:
+	./FDS <schedule.txt> <constraint>        ...you will be prompted for user input for passenger contstraints
+	(./FDS <schedule.txt> <constraint>) < <passengerConstraint.txt>  ...if youd like to redirect the in.. see in.txt for 
+		passengerConstrain.txt format
+------------------------------------------------------------------------------------------------
+***for find earliest the output is the cities to and from the specified Cities
+	AND the arrival time at the final city for the trip and the return trip
+
+
+	There is a fair amount of code which is obsolete in both findAny and findEarliest.
+	I spent a long amount of time creating informational Nodes which contained string
+	information about the path for the purpose of printing out all the information about the 
+	trip. This was surprisingly not straight forward, and abandoned the task for the time being.
+	
+	A list of cities on the trip to and from the departure city is printed for both
+	find earliest and find any.
+
+----------------------------------------------------------------------------------------------
+
+
+	There are some issues with the <cheapest> constraint.
+	The plan was to perform a depth first search, and if the destination city 
+	was reached, store the path all relevant path information, reset the color at each node on the path and continue 
+	with the DFS. Then once the DFS completes, compare prices of all found paths and return the cheapest
+	
+	I am close. There are just a few bugs left to iron out.
